@@ -1,0 +1,68 @@
+
+// string
+
+--> in redis in normal data we call it string
+
+SET: set one
+ await client.set("bike:1", "Deimos");
+
+ MGET: set multiple
+  client.mSet([
+  ["bike:1", "Deimos"],
+  ["bike:2", "Ares"],
+  ["bike:3", "Vanth"]
+])
+
+
+SETNX : stores a string value only if the key doesnot already in exists.
+
+
+
+MSET: set multiple data 
+MGET : get multiple data 
+example: meget user:1 user:2 user:3 msg:3
+
+
+LIST: its implement for stack and queue
+
+await r.lPush("nums", 2);           // LPUSH → [2]
+await r.rPush("nums", 3);           // RPUSH → [2,3]
+await r.lPush("nums", 1);           // LPUSH → [1,2,3]
+console.log(await r.lRange("nums", 0, -1)); // LRANGE → full list
+console.log(await r.lPop("nums"));  // LPOP → 1
+console.log(await r.rPop("nums"));  // RPOP → 3
+console.log(await r.lLen("nums"));  // LLEN → length = 1
+await r.lPush("a", "x", "y");       // list a → [y,x]
+await r.lMove("a", "nums", "LEFT", "RIGHT"); // LMOVE y → nums
+await r.lTrim("nums", 0, 1);        // LTRIM → keep first 2 items
+
+
+BLOCKING:
+blpop : it will wait for given blocking t time
+
+
+SET : it doesnot allow dublicate data
+
+client.sAdd('bikes:racing:france', 'bike:1')
+
+client.sIsMember('bikes:racing:usa', 'bike:1')
+
+onst res10 = await client.sMembers('bikes:racing:france')
+
+console.log(res10)  // >>> ['bike:1', 'bike:2', 'bike:3']
+
+
+ZADD: sorted set 
+
+client.zAdd('racer_scores', { score: 10, value: 'Norem' })
+client.zRange('racer_scores', 0, -1);
+
+const res19 = await client.zIncrBy('racer_scores', 50, 'Wood');
+console.log(res19);  // >>> 150.0
+
+const res20 = await client.zIncrBy('racer_scores', 50, 'Henshaw');
+
+
+---> expire 
+
+client.expire("msg:1",10)
