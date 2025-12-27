@@ -1,7 +1,7 @@
 
 // string
 
---> in redis in normal data we call it string
+in redis in normal data we call it string
 
 SET: set one
  await client.set("bike:1", "Deimos");
